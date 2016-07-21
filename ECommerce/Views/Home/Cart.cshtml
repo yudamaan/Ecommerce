@@ -1,0 +1,71 @@
+﻿@{
+    ViewBag.Title = "Cart";
+}
+
+@using Ecommerce.Data;
+@using ECommerce.Models;
+@model CartPageViewModel
+
+<h3>Shoping Cart</h3>
+<table class="table table-striped table-hover table-bordered">
+    <tr>
+        <th>Quantity</th>
+        <th>Product</th>
+        <th>Price</th>
+        <th>Action</th>
+    </tr>
+    @if (Model.ItemsInCart != null)
+    {
+        foreach (CartPagePropertis i in Model.ItemsInCart)
+        {
+            <tr>
+                <td>@i.Item.Quantity</td>
+                <td>@i.Item.Product.ProductName</td>
+                <td>
+                    <p>@i.Item.Product.Price.ToString("C") x @i.Item.Quantity = @i.TotalPerItem.ToString("C")</p>
+                </td>
+                <td>
+                    <div class="row">
+                        <form method="post" action="/home/updatequantity">
+                            <div class="col-md-3">
+                                <select name="quantity">
+                                    @for (int x = 1; x <= 10; x++)
+                                    {
+                                        
+                                        if (x == i.Item.Quantity)
+                                        {
+                                            <option selected>@x</option>
+                                        }
+                                        else
+                                        {
+                                            <option>@x</option>
+                                        }
+                                    }
+                                </select>
+                            </div>
+                            <div class="col-md-3">
+                                <input type="hidden" value="@i.Item.CartItemsId" name="itemid" />
+                                <button class="btn btn-warning">Update</button>
+                            </div>
+                        </form>                     
+                        <div class="col-md-6">
+                            <button data-item-id="@i.Item.CartItemsId" id="delete-item" class="btn btn-danger">Remove From Cart</button>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+        }
+    }
+    else
+    {
+        <tr>
+            <td colspan="4" style=""><h4 style="color:red; text-align:center;">No items Added To Cart</h4></td>
+        </tr>
+    }
+
+
+</table>
+
+@section Scripts{
+    <script src="~/Scripts/Cart.js"></script>
+}

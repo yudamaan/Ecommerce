@@ -1,0 +1,16 @@
+﻿@{
+    ViewBag.Title = "AddCategory";
+    Layout = "~/Views/Shared/AdminLayout.cshtml";
+}
+
+<div class="row">
+    <div class="col-md-6 col-md-offset-3">
+        <div class="well">
+            <form method="POST" action="/admin/addcategory">
+                <input type="text" name="categoryname" placeholder="Make" class="form-control" />
+                <br />
+                <button class="btn btn-primary">Submit</button>
+            </form>
+        </div>
+    </div>
+</div>

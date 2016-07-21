@@ -1,0 +1,42 @@
+﻿@{
+    ViewBag.Title = "AddProduct";
+    Layout = "~/Views/Shared/AdminLayout.cshtml";
+}
+@using Ecommerce.Data;
+@using ECommerce.Models;
+@model AddProductModelView
+
+<div class="row">
+    <div class="col-md-6 col-md-offset-3">
+        <div class="well">
+            <form method="POST" action="/admin/addproduct" enctype="multipart/form-data">
+                <select name="categoryid">
+                    @foreach(Category c in Model.Categories)
+                    {
+                        <option value="@c.CategoryId" >@c.CategoryName</option>
+                    }
+                </select>
+                <br />
+                <input type="text" name="productname" placeholder="Product" class="form-control" />
+                <br />
+                <input type="text" name="price" placeholder="Price" class="form-control" />
+                <br />
+                <textarea rows="5" name="description" placeholder="Description" class="form-control" ></textarea>
+                <br />
+                <div id="image-div">
+                    <input type="file" name="image[0].image" class="form-control">
+                </div>
+                <br />
+                <div>
+                    <button type="button" id="add-image" class="btn btn-primary">Add Image</button>
+                </div> 
+                <br />
+                <button class="btn btn-primary col-md-offset-5">Submit</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts{
+<script src="~/Scripts/AddProduct.js"></script>
+}
